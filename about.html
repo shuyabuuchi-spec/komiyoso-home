@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+  <title>予測の仕組み｜コミヨソ</title>
+  <meta name="description"
+        content="コミヨソの混雑予想の仕組み、利用データ、予測の特徴と注意点を紹介します。">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #f4f8fb;
+      color: #27394d;
+      font-family: system-ui, sans-serif;
+      line-height: 1.8;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px 16px;
+    }
+    header {
+      text-align: center;
+      padding: 28px 12px;
+    }
+    h1 { font-size: 27px; }
+    h2 { font-size: 21px; }
+    .card {
+      background: white;
+      padding: 24px;
+      margin-bottom: 20px;
+      border-radius: 18px;
+      box-shadow: 0 2px 10px #1734540c;
+    }
+    a { color: #2367a0; }
+    footer {
+      text-align: center;
+      padding: 24px 8px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>コミヨソの予測の仕組み</h1>
+    <p>混雑予想はどのように作られる？</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>コミヨソとは</h2>
+      <p>
+        コミヨソは、美術展やイベントなどの
+        混雑状況をデータから分析し、
+        来場する日や時間帯を選ぶための
+        参考情報を提供するサービスです。
+      </p>
+      <p>
+        現在は東京都美術館で開催される
+        オルセー美術館展の待ち時間を
+        予想しています。
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>1. 実測データの収集</h2>
+      <p>
+        展覧会の公式Xアカウントが
+        公開している待ち時間情報を参考に、
+        日付・時刻・待ち時間を記録しています。
+      </p>
+      <p>
+        投稿された時間ではなく、
+        投稿本文に記載された観測時刻を
+        優先して利用します。
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>2. 過去の混雑傾向を分析</h2>
+      <p>
+        曜日や時間帯ごとに、
+        過去の待ち時間を分析します。
+      </p>
+      <p>
+        最近の実測情報ほど重視する
+        重み付け計算を使用し、
+        混雑傾向の変化に対応します。
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>3. 天候や季節を考慮</h2>
+      <p>
+        気象庁の天気予報を参考に、
+        雨や雪などの天候による影響を
+        予測に反映します。
+      </p>
+      <p>
+        さらに、休日や会期の進行状況なども
+        考慮して混雑を予想します。
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>4. 実測データによる予測の修正</h2>
+      <p>
+        実際の待ち時間と予測結果を比較し、
+        その差を次回以降の予測に
+        反映しています。
+      </p>
+      <p>
+        当日の最新情報によっても、
+        予測値を補正する仕組みがあります。
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>5. 予測の精度と限界</h2>
+      <p>
+        コミヨソの予測は統計的な推定であり、
+        実際の待ち時間を保証するものでは
+        ありません。
+      </p>
+      <p>
+        天候、来場者数、展示運営の変更、
+        突発的なイベントなどによって
+        大きな誤差が生じる場合があります。
+      </p>
+      <p>
+        データの蓄積状況によっても
+        予測精度は変化します。
+        来場前には公式情報もご確認ください。
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>データの出典</h2>
+      <p>
+        待ち時間情報：
+        展覧会公式Xアカウント
+        <a href="https://x.com/orsay_annai">
+          @orsay_annai
+        </a>
+      </p>
+      <p>
+        気象情報：
+        <a href="https://www.jma.go.jp/">
+          気象庁
+        </a>
+      </p>
+      <p>
+        予測値はコミヨソが独自に計算した
+        ものであり、展覧会主催者や美術館が
+        発表する公式予測ではありません。
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <a href="/">トップページへ戻る</a>
+    <p>© KOMIYOSO</p>
+  </footer>
+
+</div>
+</body>
+</html>
