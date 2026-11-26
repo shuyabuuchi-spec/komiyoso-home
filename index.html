@@ -6,7 +6,7 @@
         content="width=device-width, initial-scale=1">
   <title>コミヨソ｜混雑予想サービス</title>
   <meta name="description"
-        content="コミヨソは美術展や施設の混雑・待ち時間を予測する無料Webサービスです。">
+        content="コミヨソは美術展や施設の混雑・待ち時間・グッズ完売情報を予測・整理する無料Webサービスです。">
   <meta name="google-adsense-account" content="ca-pub-1386705825630450">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1386705825630450"
        crossorigin="anonymous"></script>
@@ -33,7 +33,7 @@
     }
 
     h1 { font-size: 32px; margin: 0; }
-    h2 { font-size: 21px; }
+    h2 { font-size: 21px; margin-top: 0; }
 
     .card {
       background: white;
@@ -41,6 +41,29 @@
       margin-bottom: 20px;
       border-radius: 18px;
       box-shadow: 0 2px 10px #1734540c;
+    }
+
+    .section-heading {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 14px;
+    }
+
+    .count-pill {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 2px 10px;
+      border-radius: 999px;
+      background: #eaf3fb;
+      color: #2367a0;
+    }
+
+    .count-pill.is-upcoming {
+      background: #f3e8ff;
+      color: #5b21b6;
     }
 
     .button {
@@ -52,6 +75,11 @@
       border-radius: 12px;
       text-decoration: none;
       font-weight: bold;
+      transition: opacity 0.15s;
+    }
+
+    .button:hover {
+      opacity: 0.92;
     }
 
     .button-genji {
@@ -87,6 +115,119 @@
       border: 1px solid #d8b4fe;
     }
 
+    .status-badge.is-live {
+      background: #e6f6ec;
+      color: #166534;
+      border-color: #bbf7d0;
+    }
+
+    .empty-note {
+      margin: 4px 0 0;
+      font-size: 14px;
+      color: #64748b;
+    }
+
+    /* 公開終了アーカイブ（デフォルト閉じ） */
+    .archive-card {
+      background: #f9fbfd;
+      border: 1px solid #e2eaf2;
+      padding: 18px 22px;
+      margin-bottom: 20px;
+      border-radius: 18px;
+    }
+
+    .archive-details summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      font-size: 17px;
+      font-weight: bold;
+      color: #475569;
+    }
+
+    .archive-details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .archive-summary-left {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .archive-toggle-icon {
+      font-size: 14px;
+      font-weight: bold;
+      color: #64748b;
+      white-space: nowrap;
+    }
+
+    .archive-details summary::after {
+      content: "開く ＋";
+      font-size: 13px;
+      font-weight: bold;
+      color: #475569;
+      background: #edf2f7;
+      padding: 3px 10px;
+      border-radius: 999px;
+      flex-shrink: 0;
+    }
+
+    .archive-details[open] summary::after {
+      content: "閉じる －";
+    }
+
+    .archive-body {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid #e2eaf2;
+    }
+
+    .ended-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .ended-list li {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #e9eff5;
+      font-size: 15px;
+    }
+
+    .ended-list li:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .ended-meta {
+      font-size: 13px;
+      color: #64748b;
+    }
+
+    .ended-link {
+      font-size: 13px;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 4px 10px;
+      border-radius: 8px;
+      background: #eef4fa;
+      color: #2367a0;
+    }
+
+    .ended-link:hover {
+      text-decoration: underline;
+    }
+
     a { color: #2367a0; }
 
     footer {
@@ -118,60 +259,119 @@
       </p>
     </section>
 
-    <section class="card">
-      <h2>公開中・公開予定の混雑予想</h2>
+    <!-- 1. 公開中の混雑予想 -->
+    <section class="card" id="active-section">
+      <h2 class="section-heading">
+        公開中の混雑予想
+        <span class="count-pill" id="active-count">1件</span>
+      </h2>
 
-      <div class="exhibition-item">
-        <h3 class="exhibition-title">オルセー美術館展</h3>
-        <p>
-          東京都美術館で開催中の展覧会（〜2027年3月28日）の
-          入場待ち時間と混雑傾向、グッズ品切れ情報を確認できます。
-        </p>
-        <p>
-          実測待ち時間・日別カレンダー・
-          時間帯別の予測グラフを自動更新しています。
-        </p>
-        <a class="button"
-           href="https://orsay.komiyoso.com/">
-          オルセー展の混雑予想を見る
-        </a>
+      <div id="active-list">
+        <div class="exhibition-item"
+             data-exhibition
+             data-start="2026-11-14"
+             data-end="2027-03-28"
+             data-title="オルセー美術館展"
+             data-period="2026年11月14日〜2027年3月28日（東京都美術館）"
+             data-url="https://orsay.komiyoso.com/">
+          <h3 class="exhibition-title">
+            オルセー美術館展
+            <span class="status-badge is-live">開催中</span>
+          </h3>
+          <p>
+            東京都美術館で開催中の展覧会（〜2027年3月28日）の
+            入場待ち時間と混雑傾向、グッズ品切れ情報を確認できます。
+          </p>
+          <p>
+            実測待ち時間・日別カレンダー・
+            時間帯別の予測グラフを自動更新しています。
+          </p>
+          <a class="button"
+             href="https://orsay.komiyoso.com/">
+            オルセー展の混雑予想を見る
+          </a>
+        </div>
       </div>
+      <p class="empty-note" id="active-empty" hidden>現在、公開中の混雑予想はありません。</p>
+    </section>
 
-      <div class="exhibition-item">
-        <h3 class="exhibition-title">
-          FF40周年記念展「終わりなきファンタジーの世界」
-          <span class="status-badge">2027/1/8〜 準備中</span>
-        </h3>
-        <p>
-          東京国立博物館 表慶館で開催されるファイナルファンタジー40周年記念展
-          （2027年1月8日〜4月4日）のグッズ完売・再入荷監視と入場・物販エリア混雑予想ページです。
-        </p>
-        <p>
-          ※全日程「日付・時間帯指定制」。開館前からグッズ監視ダッシュボード・特典第1〜3弾カレンダーを公開中（開館後に実測を自動反映）。
-        </p>
-        <a class="button button-ff40th"
-           href="https://ff40th.komiyoso.com/">
-          FF40周年記念展のグッズ・入場状況を見る
-        </a>
-      </div>
+    <!-- 2. 公開予定の混雑予想 -->
+    <section class="card" id="upcoming-section">
+      <h2 class="section-heading">
+        公開予定の混雑予想
+        <span class="count-pill is-upcoming" id="upcoming-count">2件</span>
+      </h2>
 
-      <div class="exhibition-item">
-        <h3 class="exhibition-title">
-          特別展「源氏物語 王朝のかがやき」
-          <span class="status-badge">2027/1/19〜 準備中</span>
-        </h3>
-        <p>
-          東京国立博物館 平成館で開催される特別展（2027年1月19日〜3月14日）の
-          入場待ち時間と混雑傾向、グッズ品切れ情報を予想するページです。
-        </p>
-        <p>
-          ※現在、開館に向けて初期予想カレンダーを公開中です（開館後に実測を自動反映）。
-        </p>
-        <a class="button button-genji"
-           href="https://genji-kokuritsu.komiyoso.com/">
-          源氏物語展の混雑予想を見る
-        </a>
+      <div id="upcoming-list">
+        <div class="exhibition-item"
+             data-exhibition
+             data-start="2027-01-08"
+             data-end="2027-04-04"
+             data-title="FF40周年記念展「終わりなきファンタジーの世界」"
+             data-period="2027年1月8日〜4月4日（東京国立博物館 表慶館）"
+             data-url="https://ff40th.komiyoso.com/">
+          <h3 class="exhibition-title">
+            FF40周年記念展「終わりなきファンタジーの世界」
+            <span class="status-badge">2027/1/8〜 準備中</span>
+          </h3>
+          <p>
+            東京国立博物館 表慶館で開催されるファイナルファンタジー40周年記念展
+            （2027年1月8日〜4月4日）のグッズ完売・再入荷監視と入場・物販エリア混雑予想ページです。
+          </p>
+          <p>
+            ※全日程「日付・時間帯指定制」。開館前からグッズ監視ダッシュボード・特典第1〜3弾カレンダーを公開中（開館後に実測を自動反映）。
+          </p>
+          <a class="button button-ff40th"
+             href="https://ff40th.komiyoso.com/">
+            FF40周年記念展のグッズ・入場状況を見る
+          </a>
+        </div>
+
+        <div class="exhibition-item"
+             data-exhibition
+             data-start="2027-01-19"
+             data-end="2027-03-14"
+             data-title="特別展「源氏物語 王朝のかがやき」"
+             data-period="2027年1月19日〜3月14日（東京国立博物館 平成館）"
+             data-url="https://genji-kokuritsu.komiyoso.com/">
+          <h3 class="exhibition-title">
+            特別展「源氏物語 王朝のかがやき」
+            <span class="status-badge">2027/1/19〜 準備中</span>
+          </h3>
+          <p>
+            東京国立博物館 平成館で開催される特別展（2027年1月19日〜3月14日）の
+            入場待ち時間と混雑傾向、グッズ品切れ情報を予想するページです。
+          </p>
+          <p>
+            ※現在、開館に向けて初期予想カレンダーを公開中です（開館後に実測を自動反映）。
+          </p>
+          <a class="button button-genji"
+             href="https://genji-kokuritsu.komiyoso.com/">
+            源氏物語展の混雑予想を見る
+          </a>
+        </div>
       </div>
+      <p class="empty-note" id="upcoming-empty" hidden>現在、公開予定の混雑予想はありません。</p>
+    </section>
+
+    <!-- 3. 公開終了した混雑予想（デフォルト閉じた状態・開くと一覧表示） -->
+    <section class="archive-card" id="ended-section">
+      <details class="archive-details">
+        <summary>
+          <span class="archive-summary-left">
+            公開終了した混雑予想
+            <span class="count-pill" id="ended-count">0件</span>
+          </span>
+        </summary>
+        <div class="archive-body">
+          <ul class="ended-list" id="ended-list">
+            <!-- 会期終了した展覧会はここに自動（または手動）でリスト化されます -->
+          </ul>
+          <p class="empty-note" id="ended-empty">
+            現在、公開終了した展覧会はありません。会期終了後はこちらに過去実績としてまとめられます。
+          </p>
+        </div>
+      </details>
     </section>
 
     <section class="card">
@@ -209,5 +409,84 @@
   </footer>
 
 </div>
+
+<script>
+  // 日本時間（JST）の現在日付をもとに「公開中」「公開予定」「公開終了」を自動整理する
+  (function () {
+    const now = new Date();
+    const jst = new Date(now.getTime() + now.getTimezoneOffset() * 60000 + 9 * 3600000);
+    const todayStr =
+      jst.getFullYear() +
+      "-" +
+      String(jst.getMonth() + 1).padStart(2, "0") +
+      "-" +
+      String(jst.getDate()).padStart(2, "0");
+
+    const activeList = document.getElementById("active-list");
+    const upcomingList = document.getElementById("upcoming-list");
+    const endedList = document.getElementById("ended-list");
+    if (!activeList || !upcomingList || !endedList) return;
+
+    const items = Array.from(document.querySelectorAll("[data-exhibition]"));
+    items.forEach((el) => {
+      const start = el.getAttribute("data-start") || "";
+      const end = el.getAttribute("data-end") || "";
+      const badge = el.querySelector(".status-badge");
+
+      if (end && todayStr > end) {
+        // 会期終了：公開終了リスト（デフォルト閉じたアコーディオン内）へコンパクト表示で移動
+        const li = document.createElement("li");
+        const title = el.getAttribute("data-title") || "";
+        const period = el.getAttribute("data-period") || "";
+        const url = el.getAttribute("data-url") || "#";
+
+        const info = document.createElement("div");
+        const strong = document.createElement("strong");
+        strong.textContent = title;
+        const meta = document.createElement("div");
+        meta.className = "ended-meta";
+        meta.textContent = "会期：" + period;
+        info.appendChild(strong);
+        info.appendChild(meta);
+
+        const link = document.createElement("a");
+        link.className = "ended-link";
+        link.href = url;
+        link.textContent = "過去実績を見る";
+
+        li.appendChild(info);
+        li.appendChild(link);
+        endedList.appendChild(li);
+        el.remove();
+      } else if (start && todayStr >= start) {
+        // 開催期間中：公開中セクションへ配置しバッジを「開催中」に切替
+        if (badge) {
+          badge.textContent = "開催中";
+          badge.classList.add("is-live");
+        }
+        activeList.appendChild(el);
+      } else {
+        // 開幕前：公開予定セクションへ配置
+        upcomingList.appendChild(el);
+      }
+    });
+
+    const activeCount = activeList.children.length;
+    const upcomingCount = upcomingList.children.length;
+    const endedCount = endedList.children.length;
+
+    const setCount = (id, count) => {
+      const target = document.getElementById(id);
+      if (target) target.textContent = count + "件";
+    };
+    setCount("active-count", activeCount);
+    setCount("upcoming-count", upcomingCount);
+    setCount("ended-count", endedCount);
+
+    document.getElementById("active-empty").hidden = activeCount > 0;
+    document.getElementById("upcoming-empty").hidden = upcomingCount > 0;
+    document.getElementById("ended-empty").hidden = endedCount > 0;
+  })();
+</script>
 </body>
 </html>
